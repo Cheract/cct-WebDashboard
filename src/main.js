@@ -20,7 +20,7 @@ const vuetify = new Vuetify({
     },
     themes: {
       light: {
-        primary: "#ee44aa",
+        // primary: "#ee44aa",
         secondary: "#424242",
         accent: "#82B1FF",
         error: "#FF5252",
@@ -30,9 +30,9 @@ const vuetify = new Vuetify({
       },
     },
   },
-  icons: {
-    iconfont: "md",
-  },
+  // icons: {
+  //   iconfont: "md",
+  // },
   // lang: {
   //   current: language,
   //   locales: process.env.VUE_APP_MOBILE ? localesMobile : locales,
