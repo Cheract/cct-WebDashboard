@@ -28,8 +28,8 @@
         class="examine-table"
         :items="data"
         item-key="id"
+        single-expand
         dense
-        hide-default-footer
         :expanded.sync="expanded"
         :headers="tableHeaders"
         show-expand
@@ -44,16 +44,23 @@
         <template v-slot:item.year_of_birth="{ item }">
           <div>{{ item.year_of_birth }}</div>
         </template>
-        <template v-slot:item.test_name="{ item }">
-          <div>{{ item.test_name }}</div>
+        <template v-slot:item.video_length="{ item }">
+          <div>{{ item.video_length }}</div>
         </template>
         <template v-slot:item.accuracy="{ item }">
-          <div>{{ item.accuracy }}</div>
+          <span
+            v-if="item.accuracy === 'High'"
+            style="color: #1CD1A6; font-weight: bold"
+          >
+            {{ item.accuracy }}
+          </span>
+          <span v-else style="color: #F53C3C; font-weight: bold">{{
+            item.accuracy
+          }}</span>
         </template>
-        <template v-slot:item.expanded-item="{ headers, item }">
+        <template v-slot:expanded-item="{ headers, item }">
           <td :colspan="headers.length" class="subtable-container">
-            <!-- <detail-sub-table :item="item.details"></detail-sub-table> -->
-            <p>comeon {{ item.details.example }}</p>
+            <detail-sub-table :details="item.details"></detail-sub-table>
           </td>
         </template>
       </v-data-table>
@@ -63,10 +70,10 @@
 
 <script>
 import mockData from "./examineData";
-// import DetailSubTable from "./DetailSubTable.vue";
+import DetailSubTable from "./DetailSubTable.vue";
 export default {
   components: {
-    // DetailSubTable,
+    DetailSubTable,
   },
   data() {
     return {
@@ -95,9 +102,16 @@ export default {
           sortable: false,
           width: "20%",
         },
+        // {
+        //   text: "시험명",
+        //   value: "test_name",
+        //   align: "center",
+        //   sortable: false,
+        //   width: "15%",
+        // },
         {
-          text: "시험명",
-          value: "test_name",
+          text: "영상길이",
+          value: "video_length",
           align: "center",
           sortable: false,
           width: "15%",
@@ -173,12 +187,33 @@ export default {
 
 .examine-table {
   border: 1px solid #d7dae2;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
 }
 
 .subtable-container {
-  height: 80px;
+  height: 760px !important;
+}
+</style>
+
+<style>
+.examine-table > .v-data-table__wrapper {
+  border-bottom: thin solid rgba(0, 0, 0, 0.12);
+  overflow: auto;
+}
+
+tr {
+  height: 80px !important;
+}
+
+.examine-table > .v-data-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.12) !important;
+  position: absolute !important;
+  bottom: 0px !important;
+  right: 0px !important;
   width: 100%;
-  padding-left: 80px !important;
-  padding-right: 6px !important;
+  background-color: white !important;
 }
 </style>
