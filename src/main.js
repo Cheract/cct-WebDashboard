@@ -3,11 +3,8 @@ import App from "./App.vue";
 import Vuetify from "vuetify";
 import router from "../router";
 // import store from "./store";
-// import "material-design-icons-iconfont/dist/material-design-icons.css";
 import "vuetify/dist/vuetify.min.css";
-// import locales from "../locales";
-// import localesMobile from "../locales-mobile";
-// import NativeService from "../native-service";
+import ko from "vuetify/lib/locale/ko";
 
 Vue.config.productionTip = false;
 
@@ -33,10 +30,11 @@ const vuetify = new Vuetify({
   // icons: {
   //   iconfont: "md",
   // },
-  // lang: {
-  //   current: language,
-  //   locales: process.env.VUE_APP_MOBILE ? localesMobile : locales,
-  // },
+  lang: {
+    locales: { ko },
+    // locales: { ko: require("vuetify/lib/locale/ko") },
+    current: "ko",
+  },
 });
 
 new Vue({
