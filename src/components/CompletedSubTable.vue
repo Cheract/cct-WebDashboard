@@ -16,8 +16,11 @@
       </div>
       <div class="video_wrapper">
         <div
-          style="width: 600px; height: 300px; border: 1px solid lightgray;"
-        ></div>
+          @click.stop="downloadVideo"
+          style="width: 600px; height: 300px; border: 1px solid lightgray; display: flex; justify-content: center; align-items: center; font-size: 24px;"
+        >
+          클릭으로 투약영상 다운로드 받기
+        </div>
       </div>
     </div>
     <div class="lower_container">
@@ -109,6 +112,8 @@
 </template>
 
 <script>
+import axios from "axios";
+import Util from "../Util";
 export default {
   props: {
     item: {
@@ -129,7 +134,21 @@ export default {
       isDialogOpen: false,
     };
   },
-  methods: {},
+  methods: {
+    async downloadVideo() {
+      try {
+        const videoUrl = await axios.get("http://13.124.252.101:8081/video");
+        const url = videoUrl.data.data.dir;
+        console.log(url);
+        var link = document.createElement("a");
+        link.target = "_blank";
+        link.href = Util.makeUrl("http://d3k5eztauewvqi.cloudfront.net", url);
+        link.click();
+      } catch (e) {
+        console.log(e);
+      }
+    },
+  },
 };
 </script>
 

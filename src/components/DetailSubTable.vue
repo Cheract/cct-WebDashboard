@@ -16,8 +16,11 @@
       </div>
       <div class="video_wrapper">
         <div
-          style="width: 600px; height: 300px; border: 1px solid lightgray;"
-        ></div>
+          @click.stop="downloadVideo"
+          style="width: 600px; height: 300px; border: 1px solid lightgray; display: flex; justify-content: center; align-items: center; font-size: 24px;"
+        >
+          클릭으로 투약영상 다운로드 받기
+        </div>
       </div>
     </div>
     <div class="lower_container">
@@ -136,6 +139,7 @@
 
 <script>
 import axios from "axios";
+import Util from "../Util";
 
 export default {
   props: {
@@ -161,13 +165,11 @@ export default {
   },
   methods: {
     async confirmDecision(param) {
-      // await axios.put(`http://localhost:3000/data/${this.id}`, {
       await axios.put(`http://13.124.68.131:3000/data/${this.id}`, {
         ...this.item,
         status: param,
         causeOfDisapproval: this.causeOfDisapproval,
       });
-      console.log(this.causeOfDisapproval);
       window.location.reload(); //force reload after put request
     },
     openDialog() {
@@ -178,6 +180,19 @@ export default {
       this.isDialogOpen = false;
       this.confirmDecision("disapproved");
       this.causeOfDisapproval = "";
+    },
+    async downloadVideo() {
+      try {
+        const videoUrl = await axios.get("http://13.124.252.101:8081/video");
+        const url = videoUrl.data.data.dir;
+        console.log(url);
+        var link = document.createElement("a");
+        link.target = "_blank";
+        link.href = Util.makeUrl("http://d3k5eztauewvqi.cloudfront.net", url);
+        link.click();
+      } catch (e) {
+        console.log(e);
+      }
     },
   },
 };
