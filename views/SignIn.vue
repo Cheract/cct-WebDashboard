@@ -25,6 +25,7 @@
             style="margin-top: 20px"
             color="blue white--text"
             block
+            :disabled="!simpleVerification"
             @click="goToMainPage"
             >Login</v-btn
           >
@@ -47,8 +48,15 @@ export default {
       password: "",
     };
   },
+  computed: {
+    simpleVerification() {
+      return this.username.length > 1 && this.password.length > 1;
+    },
+  },
   methods: {
     goToMainPage() {
+      this.username = "";
+      this.password = "";
       this.$router.push("/main");
     },
   },

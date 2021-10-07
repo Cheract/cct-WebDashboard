@@ -92,48 +92,20 @@
         </div>
       </div>
       <div class="lower_3">
-        <v-btn class="approve-button" @click="confirmDecision('approved')"
-          >승인</v-btn
-        >
-        <v-btn class="disapprove-button" @click.stop="openDialog">거부</v-btn>
+        <div class="info-pair-wrapper">
+          <p class="sub-title">심사자 정보</p>
+          <p class="sub-info">구반석</p>
+        </div>
+        <div class="info-pair-wrapper">
+          <p class="sub-title">거부 사유</p>
+          <p class="sub-info">{{ item.causeOfDisapproval }}</p>
+        </div>
       </div>
-
-      <!-- modal / dialog -->
-      <v-dialog
-        v-model="isDialogOpen"
-        transition="dialog-top-transition"
-        max-width="600"
-      >
-        <v-card>
-          <v-card-title class="text-h5">
-            거부 사유
-          </v-card-title>
-          <v-card-text>
-            <v-select
-              dense
-              outlined
-              v-model="causeOfDisapproval"
-              :items="selectOptions"
-              placeholder="거부 사유 선택"
-              :menu-props="{ offsetY: true }"
-              required
-            ></v-select>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer> </v-spacer>
-            <v-btn color="primary" @click.stop="closeDialog">
-              확인
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   props: {
     item: {
@@ -152,30 +124,9 @@ export default {
   data() {
     return {
       isDialogOpen: false,
-      causeOfDisapproval: "",
-      selectOptions: ["다른 약 복약", "동일인이 아님", "미복용"],
     };
   },
-  methods: {
-    async confirmDecision(param) {
-      await axios.put(`http://localhost:3000/data/${this.id}`, {
-        ...this.item,
-        status: param,
-        causeOfDisapproval: this.causeOfDisapproval,
-      });
-      console.log(this.causeOfDisapproval);
-      window.location.reload(); //force reload after put request
-    },
-    openDialog() {
-      this.causeOfDisapproval = "";
-      this.isDialogOpen = true;
-    },
-    closeDialog() {
-      this.isDialogOpen = false;
-      this.confirmDecision("disapproved");
-      this.causeOfDisapproval = "";
-    },
-  },
+  methods: {},
 };
 </script>
 
@@ -221,8 +172,9 @@ export default {
 }
 .lower_3 {
   height: 55%;
+  width: 15%;
   flex-direction: column;
-  justify-content: space-around;
+  /* justify-content: space-around; */
 }
 
 .approve-button {
