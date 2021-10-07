@@ -254,7 +254,7 @@ export default {
   },
   async created() {
     // const { data } = await axios.get("http://localhost:3000/data");
-    const { data } = await axios.get("http://13.124.68.131:3000/data");
+    const { data } = await axios.get("https://13.124.68.131:3000/data");
     const pending_data = data.filter((el) => el.status === "pending");
     const completed_data = data.filter((el) => el.status !== "pending");
     this.pendingData = pending_data;
