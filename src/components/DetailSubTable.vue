@@ -7,13 +7,16 @@
             참여자 사진
           </p>
         </div>
-        <div
-          style="height: 180px; width: 180px; border: 1px solid black; margin: 0 0 0 50px;"
-        ></div>
+        <img
+          src="../../public/whale.svg"
+          width="180px"
+          height="180px"
+          style="border: 1px solid lightgray; margin: 0 0 0 50px;"
+        />
       </div>
       <div class="video_wrapper">
         <div
-          style="width: 600px; height: 300px; border: 1px solid black;"
+          style="width: 600px; height: 300px; border: 1px solid lightgray;"
         ></div>
       </div>
     </div>
