@@ -161,7 +161,8 @@ export default {
   },
   methods: {
     async confirmDecision(param) {
-      await axios.put(`http://localhost:3000/data/${this.id}`, {
+      // await axios.put(`http://localhost:3000/data/${this.id}`, {
+      await axios.put(`http://13.124.68.131:3000/data/${this.id}`, {
         ...this.item,
         status: param,
         causeOfDisapproval: this.causeOfDisapproval,
