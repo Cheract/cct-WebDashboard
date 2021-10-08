@@ -4,11 +4,8 @@
       <div class="test-title">
         <p>위더스제약_세악틸정 250밀리그램</p>
       </div>
-      <v-tabs>
-        <v-tab>대시보드</v-tab>
-        <v-tab>검수</v-tab>
-        <v-tab>참여자</v-tab>
-        <v-tab>설정</v-tab>
+      <v-tabs v-model="active_tab">
+        <v-tab v-for="tab of tabs" :key="tab.id">{{ tab.title }}</v-tab>
       </v-tabs>
       <v-btn text color="red" @click="goToSigninPage">
         로그아웃
@@ -25,7 +22,15 @@ export default {
     ExamineTable,
   },
   data() {
-    return {};
+    return {
+      active_tab: 1,
+      tabs: [
+        { id: 0, title: "대시보드" },
+        { id: 1, title: "검수" },
+        { id: 2, title: "참여자" },
+        { id: 3, title: "설정" },
+      ],
+    };
   },
   methods: {
     goToSigninPage() {
