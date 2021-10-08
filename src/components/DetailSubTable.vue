@@ -20,6 +20,7 @@
           style="width: 600px; height: 300px; border: 1px solid lightgray; display: flex; justify-content: center; align-items: center; font-size: 24px;"
         >
           클릭으로 투약영상 다운로드 받기
+          <img src="../../public/click.gif" width="120px" />
         </div>
       </div>
     </div>
